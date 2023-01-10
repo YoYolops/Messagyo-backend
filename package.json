@@ -6,11 +6,16 @@
   "repository": "https://github.com/YoYolops/messagyo-backend",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn nodemon src/index.js"
+    "dev": "yarn nodemon src/server.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "prisma": "^4.8.1",
     "socket.io": "^4.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
