@@ -2,7 +2,7 @@ import { Encrypter } from "./types";
 import bcrypt from "bcrypt";
 
 export default function encrypterAdapter(): Encrypter {
-    const SALT_ROUNDS = process.env.SALT_ROUNDS ?? 10;
+    const SALT_ROUNDS = +process.env.SALT_ROUNDS ?? 10;
 
     function verify(plainData, encryptedData) {
         return bcrypt.compareSync(plainData, encryptedData);

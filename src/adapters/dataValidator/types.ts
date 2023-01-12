@@ -1,3 +1,3 @@
 export interface DataValidator {
-    verify(data: any, schemaName: string): boolean;
+    verify(data: any): boolean;
 }

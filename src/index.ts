@@ -1,4 +1,5 @@
-import express from "express";
+import express, { json } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import http from "http";
 import "express-async-errors";
@@ -7,9 +8,10 @@ import errorHandler from "./middlewares/error";
 import mainRouter from "./router";
 
 const expressApp = express();
+expressApp.use(cors())
+expressApp.use(json())
 expressApp.use(mainRouter);
 expressApp.use(errorHandler);
-expressApp.use(express.json())
 
 const server = http.createServer(expressApp);
 
