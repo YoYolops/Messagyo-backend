@@ -1,16 +1,9 @@
 import { Router } from "express";
-import * as UserController from "../controllers/user";
-import dataValidator from "../middlewares/dataValidator";
+import userRouter from "./user";
 
 const mainRouter = Router();
+mainRouter.use("/user", userRouter);
 
 mainRouter.get("/", (req, res) => res.send("Healthy"))
-
-mainRouter.post("/user", 
-    (req, res, next) => {
-        console.log("body:", req.body)
-        dataValidator(req, res, next, "newUser")
-    },
-    UserController.registerUser);
 
 export default mainRouter;

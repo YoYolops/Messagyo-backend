@@ -1,5 +1,5 @@
 import { DataValidator } from "./types";
-import * as Schemas from "./schemas";
+import Schemas from "./schemas";
 
 export default function dataValidatorAdapter(schemaName: string): DataValidator {
     const schema = Schemas[schemaName];
@@ -11,8 +11,6 @@ export default function dataValidatorAdapter(schemaName: string): DataValidator 
 
     function verify(data: any) {
         const { error } = schema.validate(data);
-        if(error || !data) console.log(`is NOT valid therefore returning ${!error}`)
-        else console.log(`is valid therefore returning ${!error}`)
         return !error;
     }
 

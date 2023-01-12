@@ -19,8 +19,14 @@ function cumprimentar() {
 }
 
 
-const Cumprimentar = cumprimentar();
 
-console.log(cumprimentar().mal())
+function contaminate(obj) {
+    delete obj.name
+    return obj
+}
+    
 
-console.log(cumprimentar2().mal())
+const testeObj = {name: "yoyo", age: "23"}
+contaminate(testeObj)
+
+console.log(testeObj)

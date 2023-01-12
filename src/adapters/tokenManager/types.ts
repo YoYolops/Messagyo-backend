@@ -1,4 +1,4 @@
 export interface TokenManager {
-    encode(secret: string, data?: string): string,
+    encode(data: object, secret?: string): string,
     decode(token: string, secret: string): any
 }
