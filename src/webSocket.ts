@@ -1,4 +1,4 @@
-import { io } from "./index.js";
+import { io } from "./index";
 
 io.on("connection", (socket) => {
     socket.on("send_message", data => {
