@@ -1,8 +1,8 @@
 import * as T from "./types";
-import * as UserRepository from "../repositories/user";
-import * as Utils from "./utils";
-import bcryptAdapter from "../adapters/encrypter";
-import tokenAdapter from "../adapters/tokenManager";
+import * as UserRepository from "../../repositories/user";
+import * as Utils from "../utils";
+import bcryptAdapter from "../../adapters/encrypter";
+import tokenAdapter from "../../adapters/tokenManager";
 
 const EncrypterAdapter = bcryptAdapter();
 const TokenAdapter = tokenAdapter();
@@ -17,13 +17,16 @@ export async function registerNewUser(newUserData: T.NewUserRequest): Promise<T.
     })
 
     delete newUserCreated.password;
-
     return newUserCreated;
 }
 
 export async function loginUser(loginData: T.LoginRequest): Promise<T.LoginResponse> {
     const userRegistered = await UserRepository.getUser({ username: loginData.username });
-    if(!userRegistered) throw { type: "unauthorized", message: "These credentials provided does not match any" }
+
+    if(!userRegistered || !EncrypterAdapter.verify(loginData.password, userRegistered.password)) throw {
+        type: "unauthorized",
+        message: "The credentials provided does not match"
+    }
 
     const sanitizedUserData = Utils.sanitizeObject(userRegistered, ["password"])
     const token = TokenAdapter.encode(sanitizedUserData);
